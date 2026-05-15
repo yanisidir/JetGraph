@@ -1,0 +1,15 @@
+project:
+  name: JetGraph
+  random_seed: 42
+
+dataset:
+  name: energyflow_qg_jets
+  num_jets: 10000
+  pad: true
+  ncol: 4
+  generator: pythia
+  with_bc: false
+  cache_dir: data/raw/energyflow
+
+paths:
+  processed_output: data/processed/qg_jets_sample.npz

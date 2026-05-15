@@ -1,0 +1,23 @@
+name: jetgraph
+channels:
+  - pytorch
+  - pyg
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - tqdm
+  - pyyaml
+  - h5py
+  - uproot
+  - awkward
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pyg
+  - pip
+  - pip:
+      - energyflow

@@ -1,0 +1,287 @@
+# JetGraph — Project Progress Report
+
+## Project title
+
+JetGraph: Graph Neural Networks for Quark/Gluon Jet Tagging
+
+---
+
+# 1. Project objective
+
+The goal of this project is to study quark/gluon jet discrimination using modern machine learning methods and graph neural networks applied to particle-level jet constituents.
+
+The project aims to:
+
+* build a clean and reproducible HEP/ML workflow;
+* compare physics-inspired observables with graph-based learning;
+* investigate the impact of graph representation choices on classification performance;
+* develop a research-oriented particle physics ML project suitable for PhD applications.
+
+---
+
+# 2. Physics motivation
+
+At the LHC, energetic quarks and gluons fragment into collimated sprays of hadrons called jets.
+
+Quark and gluon jets exhibit different radiation patterns:
+
+* gluon jets typically produce more particles;
+* gluon jets tend to be broader due to their larger color factor.
+
+Jet tagging is an important problem in modern collider physics and is highly relevant for:
+
+* ATLAS;
+* CMS;
+* HL-LHC reconstruction;
+* anomaly detection;
+* particle-flow reconstruction.
+
+Graph neural networks are particularly well suited for this problem because a jet is naturally represented as an unordered set of particles rather than a regular image.
+
+---
+
+# 3. Dataset
+
+The project uses the EnergyFlow `qg_jets` benchmark dataset.
+
+Dataset characteristics:
+
+* 10,000 jets;
+* particle-level jet constituents;
+* padded variable-length jets;
+* labels:
+
+  * 0 → gluon jet
+  * 1 → quark jet
+
+Each particle contains:
+
+* transverse momentum pT;
+* pseudorapidity η;
+* azimuthal angle φ;
+* particle identifier pid.
+
+---
+
+# 4. Project structure
+
+The repository was organized as a modular scientific workflow:
+
+```text
+configs/
+data/
+scripts/
+figures/
+reports/
+slides/
+src/jetgraph/
+```
+
+Main modules:
+
+* data loading;
+* physics observables;
+* graph construction;
+* model training;
+* evaluation;
+* plotting.
+
+---
+
+# 5. Physics-inspired baseline observables
+
+A first interpretable baseline was constructed using:
+
+* jet multiplicity;
+* total transverse momentum;
+* jet mass;
+* eta width;
+* phi width.
+
+These observables were used with:
+
+* Logistic Regression;
+* Random Forest;
+* Gradient Boosting.
+
+---
+
+# 6. Baseline results
+
+Obtained ROC AUC scores:
+
+* Logistic Regression: 0.8579
+* Random Forest: 0.8451
+* Gradient Boosting: 0.8616
+
+Important observation:
+simple physics-inspired observables already provide strong quark/gluon discrimination power.
+
+---
+
+# 7. Graph construction
+
+Jets were converted into graphs using PyTorch Geometric.
+
+Graph representation:
+
+* nodes = jet particles;
+* edges = k-nearest neighbours in the (η, φ) plane;
+* default connectivity: k = 8.
+
+Average graph properties:
+
+* average nodes per graph: 43.24
+* average directed edges: 345.88
+
+---
+
+# 8. Node feature studies
+
+Three node-feature representations were implemented.
+
+## Raw features
+
+Features:
+
+* pT
+* η
+* φ
+* pid
+
+Result:
+
+* ROC AUC = 0.8580
+
+---
+
+## Physics-only relative features
+
+Features:
+
+* log(pT)
+* pT fraction
+* delta_eta
+* delta_phi
+* delta_R
+* pid
+
+Result:
+
+* ROC AUC = 0.8102
+
+Observation:
+relative physics-inspired features alone significantly degraded performance.
+
+---
+
+## Hybrid features
+
+Features:
+
+* pT
+* log(pT)
+* pT fraction
+* η
+* φ
+* delta_eta
+* delta_phi
+* delta_R
+* pid
+
+Result:
+
+* ROC AUC = 0.8617
+
+Observation:
+combining raw kinematic information with relative physics-inspired quantities recovered the best performance.
+
+---
+
+# 9. First GNN architecture
+
+A first EdgeConv-based graph neural network was implemented using:
+
+* EdgeConv layers;
+* ReLU activations;
+* global mean pooling;
+* MLP classifier.
+
+Training setup:
+
+* 20–30 epochs;
+* PyTorch Geometric DataLoader;
+* CrossEntropyLoss.
+
+---
+
+# 10. Current conclusions
+
+Current best results:
+
+* Gradient Boosting baseline: 0.8616
+* EdgeConv hybrid GNN: 0.8617
+
+Main conclusion:
+the first graph-based model reaches performance comparable to the best interpretable baseline.
+
+This suggests that:
+
+* classical jet observables already encode significant quark/gluon information;
+* feature representation strongly impacts GNN performance;
+* graph construction choices are critical.
+
+---
+
+# 11. Scientific value of the project
+
+The project now includes:
+
+* physics motivation;
+* feature engineering;
+* graph representation;
+* baseline ML comparison;
+* GNN implementation;
+* ablation studies;
+* reproducible workflows;
+* structured evaluation.
+
+The project is now at the level of a strong research-oriented Master project in modern HEP machine learning.
+
+---
+
+# 12. Planned next steps
+
+Planned future developments:
+
+* k-nearest-neighbour connectivity study;
+* graph visualization;
+* jet visualization in η-φ space;
+* interpretability studies;
+* saliency maps;
+* Integrated Gradients;
+* Pythia vs Herwig robustness study;
+* ParticleNet-like architectures;
+* DynamicEdgeConv;
+* improved normalization strategies.
+
+---
+
+# 13. Current repository status
+
+The project already contains:
+
+* processed datasets;
+* graph datasets;
+* trained GNN checkpoints;
+* ROC curves;
+* feature importance plots;
+* model comparison plots;
+* modular code architecture.
+
+The repository is now suitable for:
+
+* GitHub portfolio presentation;
+* PhD applications;
+* future methodological extensions;
+* scientific reporting and presentations.
