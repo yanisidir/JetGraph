@@ -22,9 +22,7 @@ data/processed/
 *.npy
 *.npz
 
-# Figures, reports, and experiment outputs
-figures/*.pdf
-figures/*.png
+# Reports, and experiment outputs
 reports/*.html
 reports/*.aux
 reports/*.log
@@ -33,7 +31,6 @@ reports/*.bbl
 reports/*.blg
 reports/*.toc
 models/*.pt
-slides/*.pdf
 wandb/
 runs/
 
