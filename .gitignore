@@ -33,8 +33,26 @@ reports/*.toc
 models/*.pt
 wandb/
 runs/
+slides/
+
+# LaTeX generated files
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.vrb
+*.txt
 
 # System/editor files
 .DS_Store
 .idea/
 .vscode/
+
+
